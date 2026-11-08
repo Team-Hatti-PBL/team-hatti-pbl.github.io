@@ -20,6 +20,6 @@ slides/slide-3.png
 ...
 ```
 
-The carousel on the site auto-detects slides starting at `slide-1` and stops
-at the first missing number. `.jpg` / `.jpeg` are also supported. No code
-changes are needed — just add the files and they appear on the site.
+`.jpg` / `.jpeg` are also supported. After adding or renaming slides, update
+`slides/manifest.json` with the ordered list of filenames so the carousel
+can show them immediately (without probing each file over the network).

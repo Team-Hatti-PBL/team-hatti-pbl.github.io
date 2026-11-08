@@ -1,17 +1,12 @@
 /**
  * Team Hatti — Presentation carousel
  *
- * Auto-detects slide images in the `slides/` folder. It looks for
- * slides/slide-1.(png|jpg|jpeg), slide-2.(…), … and stops at the first
- * index that has no matching image. Just drop your exported Canva slides
- * into the slides/ folder named slide-1.png, slide-2.png, … and they
- * will appear here automatically — no code changes needed.
+ * Loads the slide list from slides/manifest.json (one small request),
+ * then shows the first slide immediately. That avoids probing every
+ * filename/extension over the network, which used to delay the carousel.
  */
 (function () {
   "use strict";
-
-  var EXTENSIONS = ["png", "jpg", "jpeg", "PNG", "JPG"];
-  var MAX_SLIDES = 200; // safety cap
 
   var track = document.getElementById("carouselTrack");
   var dotsWrap = document.getElementById("carouselDots");
@@ -23,47 +18,18 @@
   var slides = [];
   var current = 0;
 
-  // Try to load a single image, resolving with its src if it exists.
-  function tryLoad(src) {
-    return new Promise(function (resolve) {
-      var img = new Image();
-      img.onload = function () {
-        resolve(img.naturalWidth > 0 ? src : null);
-      };
-      img.onerror = function () {
-        resolve(null);
-      };
-      img.src = src;
-    });
-  }
-
-  // Find the image for a given slide index, trying each extension in turn.
-  function findSlide(index) {
-    var attempts = EXTENSIONS.map(function (ext) {
-      return "slides/slide-" + index + "." + ext;
-    });
-
-    return attempts.reduce(function (chain, src) {
-      return chain.then(function (found) {
-        return found ? found : tryLoad(src);
+  function loadManifest() {
+    return fetch("slides/manifest.json", { cache: "no-cache" })
+      .then(function (res) {
+        if (!res.ok) return [];
+        return res.json();
+      })
+      .then(function (list) {
+        return Array.isArray(list) ? list : [];
+      })
+      .catch(function () {
+        return [];
       });
-    }, Promise.resolve(null));
-  }
-
-  // Walk slide-1, slide-2, … until one is missing.
-  function discoverSlides() {
-    var found = [];
-
-    function next(index) {
-      if (index > MAX_SLIDES) return Promise.resolve(found);
-      return findSlide(index).then(function (src) {
-        if (!src) return found;
-        found.push(src);
-        return next(index + 1);
-      });
-    }
-
-    return next(1);
   }
 
   // With many slides, dots wrap into messy rows — use a counter instead.
@@ -126,7 +92,7 @@
   }
 
   function init() {
-    discoverSlides().then(function (found) {
+    loadManifest().then(function (found) {
       slides = found;
 
       if (!slides.length) {
