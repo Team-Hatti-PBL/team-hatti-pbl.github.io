@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="team-hatti-logo.png" alt="Team Hatti Logo" width="220" />
+<img src="team-hatti-emblem.png" alt="Team Hatti Logo" width="220" />
 
 # Team Hatti
 
