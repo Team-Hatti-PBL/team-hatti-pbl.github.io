@@ -21,6 +21,7 @@
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#research">Research</a></li>
+        <li><a href="#presentation">Presentation</a></li>
         <li><a href="#team">Team</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -111,6 +112,32 @@
       </div>
     </section>
 
+    <section id="presentation" class="section">
+      <h2 class="section-title">Our Presentation</h2>
+      <p class="section-lead">
+        Explore the slides from our project presentation on tackling plastic pollution.
+      </p>
+
+      <div class="carousel" id="carousel" aria-roledescription="carousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="carouselTrack">
+            <!-- Slides are injected here automatically from the slides/ folder -->
+          </div>
+        </div>
+
+        <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Previous slide">&#8249;</button>
+        <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Next slide">&#8250;</button>
+
+        <div class="carousel-dots" id="carouselDots"></div>
+
+        <div class="carousel-empty" id="carouselEmpty" hidden>
+          <p><strong>No slides found yet.</strong></p>
+          <p>Export your Canva presentation as PNG (all pages) and add the images to a
+          <code>slides/</code> folder, named <code>slide-1.png</code>, <code>slide-2.png</code>, and so on.</p>
+        </div>
+      </div>
+    </section>
+
     <section id="contact" class="section">
       <h2 class="section-title">Get Involved</h2>
       <p class="section-lead">
@@ -127,5 +154,7 @@
     <p>Team Hatti — Protecting our planet, one step at a time. 🐘🌏</p>
     <p class="copyright">© 2026 Team Hatti. All rights reserved.</p>
   </footer>
+
+  <script src="carousel.js"></script>
 </body>
 </html>
