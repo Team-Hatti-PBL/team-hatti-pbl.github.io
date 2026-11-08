@@ -102,8 +102,8 @@ h1, h2, h3, h4 {
 }
 
 .hero-logo {
-  width: 200px;
-  height: 200px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
   background: var(--cream);
   padding: 8px;
@@ -500,8 +500,8 @@ h1, h2, h3, h4 {
     font-size: 2.75rem;
   }
   .hero-logo {
-    width: 150px;
-    height: 150px;
+    width: 190px;
+    height: 190px;
   }
   .team-grid {
     grid-template-columns: 1fr;
