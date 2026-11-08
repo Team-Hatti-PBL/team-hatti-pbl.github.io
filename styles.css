@@ -239,18 +239,47 @@ h1, h2, h3, h4 {
   background: linear-gradient(135deg, var(--forest-light), var(--indigo));
 }
 
+.avatar-img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1rem;
+  display: block;
+  border: 3px solid var(--cream-dark);
+  box-shadow: 0 4px 12px rgba(30, 64, 35, 0.15);
+}
+
+.team-card--mentor .avatar-img {
+  border-color: var(--gold);
+}
+
 .team-card h4 {
   font-size: 1.25rem;
   color: var(--text);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.1rem;
+}
+
+.jp-name {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
 }
 
 .role {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--gold);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.team-note {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
 }
 
 /* Research grid */
