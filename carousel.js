@@ -66,9 +66,13 @@
     return next(1);
   }
 
+  // With many slides, dots wrap into messy rows — use a counter instead.
+  var useDots = false;
+
   function render() {
     track.innerHTML = "";
     dotsWrap.innerHTML = "";
+    useDots = slides.length <= 12;
 
     slides.forEach(function (src, i) {
       var slide = document.createElement("div");
@@ -80,24 +84,38 @@
       slide.appendChild(img);
       track.appendChild(slide);
 
-      var dot = document.createElement("button");
-      dot.className = "carousel-dot";
-      dot.setAttribute("aria-label", "Go to slide " + (i + 1));
-      dot.addEventListener("click", function () {
-        goTo(i);
-      });
-      dotsWrap.appendChild(dot);
+      if (useDots) {
+        var dot = document.createElement("button");
+        dot.className = "carousel-dot";
+        dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+        dot.addEventListener("click", function () {
+          goTo(i);
+        });
+        dotsWrap.appendChild(dot);
+      }
     });
+
+    if (!useDots) {
+      var counter = document.createElement("span");
+      counter.className = "carousel-counter";
+      counter.id = "carouselCounter";
+      dotsWrap.appendChild(counter);
+    }
 
     update();
   }
 
   function update() {
     track.style.transform = "translateX(" + -current * 100 + "%)";
-    var dots = dotsWrap.querySelectorAll(".carousel-dot");
-    dots.forEach(function (d, i) {
-      d.classList.toggle("active", i === current);
-    });
+    if (useDots) {
+      var dots = dotsWrap.querySelectorAll(".carousel-dot");
+      dots.forEach(function (d, i) {
+        d.classList.toggle("active", i === current);
+      });
+    } else {
+      var counter = document.getElementById("carouselCounter");
+      if (counter) counter.textContent = current + 1 + " / " + slides.length;
+    }
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current === slides.length - 1;
   }
